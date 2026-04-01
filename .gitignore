@@ -1,0 +1,39 @@
+# Python ignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+.env
+*.env
+.env.*
+
+
+# Node.js ignore
+node_modules/
+dist/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java ignore
+target/
+build/
+.gradle/
+*.class
+*.jar
+*.war
+*.ear
+
+# Gemini CLI Skill package
+*.skill
+
+# OS files
+.DS_Store
+Thumbs.db
