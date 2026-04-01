@@ -3,10 +3,35 @@ import re
 
 # 敏感詞與高風險函式
 SENSITIVE_PATTERNS = {
-    'Hardcoded Secrets': [r'API_KEY\s*=\s*["\']\w+["\']', r'PASSWORD\s*=\s*["\']\w+["\']', r'SECRET\s*=\s*["\']\w+["\']'],
-    'Command Injection': [r'\bos\.system\(', r'\bsubprocess\.run\(', r'\beval\(', r'\bexec\('],
-    'Suspicious Network': [r'requests\.post\(', r'http\.client\.HTTPSConnection\(', r'\baxios\.post\('],
-    'Sensitive File Access': [r'\bos\.remove\(', r'\bshutil\.rmtree\(', r'\bfs\.unlink\(']
+    'Hardcoded Secrets': [
+        r'(?i)api_key\s*=\s*["\'][A-Za-z0-9_\-\.]+["\']',
+        r'(?i)password\s*=\s*["\'][A-Za-z0-9_\-\.]+["\']',
+        r'(?i)secret\s*=\s*["\'][A-Za-z0-9_\-\.]+["\']',
+        r'AKIA[0-9A-Z]{16}', # AWS Access Key
+        r'sk_live_[0-9a-zA-Z]{24}' # Stripe Secret Key
+    ],
+    'Command Injection': [
+        r'\bos\.system\(', 
+        r'\bsubprocess\.(run|Popen|call)\(', 
+        r'\beval\(', 
+        r'\bexec\(',
+        r'\bchild_process\.(exec|spawn)\('
+    ],
+    'Insecure Data Loading': [
+        r'\bpickle\.load\(',
+        r'\byaml\.load\(', # Should use SafeLoader
+        r'\bjson\.loads\(.*,\s*object_hook='
+    ],
+    'XSS / Dangerous HTML': [
+        r'\.innerHTML\s*=',
+        r'dangerouslySetInnerHTML\s*=',
+        r'\bdocument\.write\('
+    ],
+    'Suspicious Network': [
+        r'requests\.(post|get|put)\(', 
+        r'http\.client\.HTTPSConnection\(', 
+        r'\baxios\.(post|get)\('
+    ]
 }
 
 def audit_file(filepath):

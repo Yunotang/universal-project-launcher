@@ -28,7 +28,6 @@ def scan_directory(directory='.'):
                 try:
                     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
                         content = f.read()
-                        # Check for if __name__ == "__main__":
                         if re.search(r'if\s+__name__\s*==\s*["\']__main__["\']\s*:', content):
                             has_gui = any(re.search(rf'\bimport\s+{lib}\b|\bfrom\s+{lib}\b', content) for lib in GUI_LIBRARIES)
                             results['python'].append({
@@ -40,16 +39,35 @@ def scan_directory(directory='.'):
 
             # --- Node.js Detection ---
             if filename == 'package.json':
-                results['nodejs'].append({
-                    'path': rel_path,
-                    'type': 'package'
-                })
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        pkg = json.load(f)
+                        main_file = pkg.get('main', 'index.js')
+                        results['nodejs'].append({
+                            'path': rel_path,
+                            'entry': main_file,
+                            'type': 'package'
+                        })
+                except Exception:
+                    results['nodejs'].append({'path': rel_path, 'type': 'package'})
+            elif filename in ['index.js', 'server.js', 'app.js']:
+                results['nodejs'].append({'path': rel_path, 'type': 'direct-entry'})
 
             # --- Java Detection ---
-            if filename in ['pom.xml', 'build.gradle', 'application.properties']:
+            if filename.endswith('.java'):
+                try:
+                    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+                        if 'public static void main' in f.read():
+                            results['java'].append({
+                                'path': rel_path,
+                                'type': 'main-class'
+                            })
+                except Exception:
+                    pass
+            elif filename in ['pom.xml', 'build.gradle']:
                 results['java'].append({
                     'path': rel_path,
-                    'type': 'config'
+                    'type': 'build-config'
                 })
     
     return results
