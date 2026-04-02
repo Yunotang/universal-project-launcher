@@ -17,7 +17,7 @@
 直接從 GitHub 安裝：
 
 ```bash
-gemini skills install https://github.com/<您的用戶名>/universal-project-launcher.git
+gemini skills install https://github.com/Yunotang/universal-project-launcher.git
 ```
 
 或從本地安裝：

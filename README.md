@@ -15,7 +15,7 @@ This repository contains a specialized skill for **Gemini CLI** that provides an
 Install directly from GitHub:
 
 ```bash
-gemini skills install https://github.com/<your-username>/universal-project-launcher.git
+gemini skills install https://github.com/Yunotang/universal-project-launcher.git
 ```
 
 Or install locally:
