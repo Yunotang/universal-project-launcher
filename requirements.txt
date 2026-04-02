@@ -1,0 +1,8 @@
+# Universal Project Launcher Dependencies
+# Required Python Version: 3.11 or 3.13
+
+# Standard library modules used (no external pip install required for core scripts):
+# - os, re, json, sys, platform
+
+# Optional dependencies for enhanced security scanning (if implemented):
+# mcp_osvScanner
