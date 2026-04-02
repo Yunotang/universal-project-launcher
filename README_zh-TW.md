@@ -1,6 +1,13 @@
-# 萬用專案啟動器 (Python, Node.js, Java)
+# 萬用專案啟動器 (僅限 Windows 作業環境)
 
 此儲存庫包含一個專為 **Gemini CLI** 設計的擴展功能（Skill），提供自動化、安全優先的工作流程，用於在多種技術棧上設置並啟動軟體專案。
+
+> **注意：** 本工具專為 **Windows** 系統設計，並使用 `.bat` 腳本實現持久化啟動功能。
+
+## 系統需求
+- **作業系統**：Windows 10 或 11 (64-bit)
+- **環境**：CMD 或 PowerShell (Windows 原生環境)
+- **相依工具**：需在 PATH 中安裝 Python (3.11/3.13)、Node.js 或 Java。
 
 ## 功能特點
 - **智慧技術棧偵測**：自動識別 Python、Node.js 與 Java 專案，包含對 Java `main` 類別與 Node.js `package.json` 的深層偵測。

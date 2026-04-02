@@ -1,8 +1,15 @@
-# Universal Project Launcher (Python, Node.js, Java)
+# Universal Project Launcher (Windows Only)
 
 [繁體中文版說明](./README_zh-TW.md)
 
 This repository contains a specialized skill for **Gemini CLI** that provides an automated, security-focused workflow for setting up and launching software projects across multiple technical stacks.
+
+> **Note:** This tool is specifically designed for **Windows** environments and utilizes `.bat` scripts for persistent launchers.
+
+## System Requirements
+- **OS**: Windows 10 or 11 (64-bit)
+- **Environment**: CMD or PowerShell
+- **Tools**: Python (3.11/3.13), Node.js, or Java installed in PATH.
 
 ## Features
 - **Intelligent Tech Stack Detection**: Automatically recognizes Python, Node.js, and Java projects.
