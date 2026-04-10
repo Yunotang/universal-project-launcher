@@ -15,14 +15,15 @@ This repository contains a specialized skill for **Gemini CLI** that provides an
 
 ```mermaid
 graph LR
-    A[💡 Detect Stack] --> B[🛡️ Security Audit]
-    B --> C[📦 Install Deps]
-    C --> D[🚀 Background Launch]
-    D --> E[✅ Persistent .BAT]
+    A[💡 Detect Stack] --> B[🐍 Create Venv]
+    B --> C[🛡️ Security Audit]
+    C --> D[📦 Install Deps]
+    D --> E[🚀 Background Launch]
+    E --> F[✅ Persistent .BAT]
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#ff9,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#ff9,stroke:#333,stroke-width:2px
+    style F fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
 ----------------------------------------

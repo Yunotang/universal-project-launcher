@@ -13,14 +13,15 @@
 
 ```mermaid
 graph LR
-    A[💡 技術棧偵測] --> B[🛡️ 安全性審核]
-    B --> C[📦 依賴安裝]
-    C --> D[🚀 背景即時啟動]
-    D --> E[✅ 建立 .BAT 啟動檔]
+    A[💡 技術棧偵測] --> B[🐍 建立虛擬環境]
+    B --> C[🛡️ 安全性審核]
+    C --> D[📦 依賴安裝]
+    D --> E[🚀 背景即時啟動]
+    E --> F[✅ 建立 .BAT 啟動檔]
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#ff9,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#ff9,stroke:#333,stroke-width:2px
+    style F fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
 ----------------------------------------
