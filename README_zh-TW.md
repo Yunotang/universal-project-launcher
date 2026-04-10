@@ -9,6 +9,22 @@
 - **環境**：CMD 或 PowerShell (Windows 原生環境)
 - **相依工具**：需在 PATH 中安裝 Python (3.11/3.13)、Node.js 或 Java。
 
+## 📦 核心工作流程
+
+```mermaid
+graph LR
+    A[💡 技術棧偵測] --> B[🛡️ 安全性審核]
+    B --> C[📦 依賴安裝]
+    C --> D[🚀 背景即時啟動]
+    D --> E[✅ 建立 .BAT 啟動檔]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+----------------------------------------
+
 ## 功能特點
 - **智慧技術棧偵測**：自動識別 Python、Node.js 與 Java 專案，包含對 Java `main` 類別與 Node.js `package.json` 的深層偵測。
 - **環境與依賴管理**：處理 `venv`、`npm install` 以及 Java 建置工具配置，並驗證 Python 版本 (3.11/3.13)。

@@ -11,6 +11,22 @@ This repository contains a specialized skill for **Gemini CLI** that provides an
 - **Environment**: CMD or PowerShell
 - **Tools**: Python (3.11/3.13), Node.js, or Java installed in PATH.
 
+## 📦 Core Workflow
+
+```mermaid
+graph LR
+    A[💡 Detect Stack] --> B[🛡️ Security Audit]
+    B --> C[📦 Install Deps]
+    C --> D[🚀 Background Launch]
+    D --> E[✅ Persistent .BAT]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+----------------------------------------
+
 ## Features
 - **Intelligent Tech Stack Detection**: Automatically recognizes Python, Node.js, and Java projects.
 - **Environment & Dependency Management**: Handles `venv`, `npm install`, and Java build tool configurations.
