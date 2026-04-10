@@ -1,45 +1,84 @@
 import os
 import sys
-import platform
+import argparse
 
-def check_python_version():
-    major, minor = sys.version_info.major, sys.version_info.minor
-    # 遵循 GEMINI.md 要求：Python 3.11 或 3.13
-    if major == 3 and (minor == 11 or minor == 13):
-        return True
-    return False
-
-def create_bat_launcher(project_name, entry_point, project_type):
-    bat_content = "@echo off\n"
-    bat_content += f"echo Launching {project_name}...\n"
+def create_bat_launcher(project_name, entry_point):
+    """
+    Creates a robust, linear, all-English Windows launcher (.bat).
+    Follows Windows Stability Standards:
+    - Pure linear execution (no IF blocks).
+    - Absolute path referencing via %~dp0.
+    - Forced UTF-8 via PYTHONUTF8=1.
+    - No Emoji or non-ASCII characters.
+    """
     
-    if project_type == 'python':
-        if os.path.exists('.venv'):
-            bat_content += "call .venv\\Scripts\\activate\n"
-        bat_content += f"python \"{entry_point}\"\n"
-    elif project_type == 'nodejs':
-        bat_content += f"node \"{entry_point}\"\n"
-    elif project_type == 'java':
-        bat_content += f"java -jar \"{entry_point}\"\n"
-    
-    bat_content += "pause\n"
-    
-    filename = f"launch_{project_name.lower().replace(' ', '_')}.bat"
+    # 1. Determine app type in Python (not in .bat)
+    is_streamlit = False
     try:
+        with open(entry_point, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+            if 'import streamlit' in content or 'from streamlit' in content:
+                is_streamlit = True
+    except:
+        pass
+
+    # 2. Construct absolute paths and command
+    # Use %~dp0 to ensure the launcher works regardless of where it's called from
+    python_exe = '"%~dp0.venv\\Scripts\\python.exe"'
+    entry_abs = f'"%~dp0{os.path.basename(entry_point)}"'
+    
+    if is_streamlit:
+        launcher_cmd = f'{python_exe} -m streamlit run {entry_abs}'
+    else:
+        launcher_cmd = f'{python_exe} {entry_abs}'
+
+    # 3. Generate pure linear .bat content
+    bat_content = f'''@echo off
+setlocal
+title {project_name} Launcher
+cd /d "%~dp0"
+
+set PYTHONUTF8=1
+set PYTHONIOENCODING=utf-8
+chcp 65001 >nul
+
+echo ============================================
+echo Starting {project_name}...
+echo Target: {entry_abs}
+echo ============================================
+
+{launcher_cmd}
+
+echo.
+echo ============================================
+echo Execution finished.
+echo ============================================
+pause
+exit /b
+'''
+    # Use standard project name format
+    safe_name = project_name.lower().replace(' ', '_')
+    filename = f"launch_{safe_name}.bat"
+    
+    try:
+        # Save with standard UTF-8 (w/o BOM) for maximum compatibility
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(bat_content)
-        print(f"✅ Success: Created persistent launcher -> {filename}")
+        print(f"Success: Created standardized launcher -> {filename}")
         return True
     except Exception as e:
-        print(f"❌ Error: Failed to create launcher: {str(e)}")
+        print(f"Error: Failed to create launcher: {str(e)}")
         return False
 
 if __name__ == '__main__':
-    if not check_python_version():
-        print(f"⚠️ Warning: Current Python version ({sys.version}) does not match recommended 3.11/3.13.")
+    parser = argparse.ArgumentParser(description='Create a standardized Windows launcher.')
+    parser.add_argument('--name', required=True, help='Project name')
+    parser.add_argument('--entry', required=True, help='Entry point filename')
+    parser.add_argument('--path', help='Project path (optional)')
     
-    # Example usage (can be called from the main workflow)
-    if len(sys.argv) > 3:
-        create_bat_launcher(sys.argv[1], sys.argv[2], sys.argv[3])
-    else:
-        print("Usage: python create_launcher.py [project_name] [entry_point] [type]")
+    args = parser.parse_args()
+    
+    if args.path:
+        os.chdir(args.path)
+        
+    create_bat_launcher(args.name, args.entry)
