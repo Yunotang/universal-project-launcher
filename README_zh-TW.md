@@ -7,7 +7,7 @@
 ## 系統需求
 - **作業系統**：Windows 10 或 11 (64-bit)
 - **環境**：CMD 或 PowerShell (Windows 原生環境)
-- **相依工具**：需在 PATH 中安裝 Python (3.11/3.13)、Node.js 或 Java。
+- **相依工具**：需在 PATH 中安裝 Python 3.x、Node.js 或 Java。
 
 ## 📦 核心工作流程
 

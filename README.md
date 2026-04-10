@@ -9,7 +9,7 @@ This repository contains a specialized skill for **Gemini CLI** that provides an
 ## System Requirements
 - **OS**: Windows 10 or 11 (64-bit)
 - **Environment**: CMD or PowerShell
-- **Tools**: Python (3.11/3.13), Node.js, or Java installed in PATH.
+- **Tools**: Python 3.x, Node.js, or Java installed in PATH.
 
 ## 📦 Core Workflow
 

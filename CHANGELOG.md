@@ -1,5 +1,11 @@
 # Changelog - Universal Project Launcher
 
+## [2.3.0] - 2026-04-10
+### Added
+- **Visual Workflow**: Added Mermaid diagrams to README for better process visualization.
+- **Enhanced Compatibility**: Removed strict Python 3.11/3.13 restrictions; now supports all Python 3.x (3.8+ recommended) to improve accessibility for various developer environments.
+- **Improved Documentation**: Refined bilingual READMEs with a more modern, scannable layout.
+
 ## [2.2.0] - 2026-04-10
 ### Added
 - **Windows Robustness Standards (Mandatory)**: 

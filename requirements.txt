@@ -1,5 +1,5 @@
 # Universal Project Launcher Dependencies
-# Required Python Version: 3.11 or 3.13
+# Required Python Version: 3.x (Compatible with 3.8+)
 
 # Standard library modules used (no external pip install required for core scripts):
 # - os, re, json, sys, platform
